@@ -79,9 +79,7 @@ abbr -a pacown 'pacman -Ql'
 # show package(s) owning the specified file
 abbr -a pacblame 'pacman -Qo'
 
-set -l uninstall (basename (status -f) .fish){_uninstall}
-
-function $uninstall --on-event $uninstall
+function __fish_pacman_abbr_uninstall --on-event fish_pacman_abbr_uninstall
     abbr --erase pacb
     abbr --erase paci
     abbr --erase pacI
