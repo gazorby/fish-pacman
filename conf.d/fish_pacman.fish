@@ -79,7 +79,7 @@ abbr -a pacown 'pacman -Ql'
 # show package(s) owning the specified file
 abbr -a pacblame 'pacman -Qo'
 
-function __fish_pacman_abbr_uninstall --on-event fish_pacman_abbr_uninstall
+function __fish_pacman_uninstall --on-event fish_pacman_uninstall
     abbr --erase pacb
     abbr --erase paci
     abbr --erase pacI
