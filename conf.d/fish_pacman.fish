@@ -96,4 +96,7 @@ function __fish_pacman_uninstall --on-event fish_pacman_uninstall
     abbr --erase pacor
     abbr --erase pacown
     abbr --erase pacblame
+    functions --erase aurb
+    functions --erase aurd
+    functions --erase auru
 end
