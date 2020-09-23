@@ -79,6 +79,10 @@ abbr -a pacown 'pacman -Ql'
 # show package(s) owning the specified file
 abbr -a pacblame 'pacman -Qo'
 
+# Upgrade using powerpill to download from all mirrors simultaneously
+abbr -a upgrade 'sudo pacman -Sy && sudo powerpill -Su && yay -Su'
+
+
 function __fish_pacman_uninstall --on-event fish_pacman_uninstall
     abbr --erase pacb
     abbr --erase paci
@@ -96,6 +100,7 @@ function __fish_pacman_uninstall --on-event fish_pacman_uninstall
     abbr --erase pacor
     abbr --erase pacown
     abbr --erase pacblame
+    abbr --erase upgrade
     functions --erase aurb
     functions --erase aurd
     functions --erase auru

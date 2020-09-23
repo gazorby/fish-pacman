@@ -23,6 +23,9 @@ fisher add Gazorby/fish-pacman
   * `pacU` install packages from pkg file.
   * `pacd` install all packages in current directory.
 
+### Upgrade
+  * `upgrade` update mirrors and upgrade packages from all of them simultaneously (need [powerpill](https://wiki.archlinux.org/index.php/Powerpill))
+
 ### Remove
 
   * `pacr` remove package and unneeded dependencies.
