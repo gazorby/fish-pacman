@@ -1,107 +1,107 @@
 # Adapted from here https://github.com/zimfw/pacman
+set -q __pacman_abbr_initialized; and exit 0
 
-# build package in current directory, cleanup, and install
-abbr -a pacb 'makepkg -sci'
+function __pacman_abbr_install --on-event fish_pacman_install
+    set -U __pacman_abbr_abbreviations
 
-#
-# Install
-#
+    function __pacman_abbr -d "Create Git plugin abbreviation"
+        set -l name $argv[1]
+        set -l body $argv[2..-1]
+        abbr -a $name $body
+        set -a __pacman_abbr_abbreviations $name
+    end
 
-#NOTE: Installing/upgrading individual packages is NOT supported. Sync and upgrade ALL on install.
+    # build package in current directory, cleanup, and install
+    __pacman_abbr pacb 'makepkg -sci'
 
-# install, sync, and upgrade packages
-abbr -a paci 'pacman -Syu'
+    #
+    # Install
 
-# install packages without syncing
-abbr -a pacI 'pacman -S'
+    #
+    #NOTE: Installing/upgrading individual packages is NOT supported. Sync and upgrade ALL on install.
 
-# install, sync, and upgrade packages (forcibly refresh package lists)
-abbr -a pacu 'pacman -Syyu'
+    # install, sync, and upgrade packages
+    __pacman_abbr paci 'pacman -Syu'
 
-# install packages by filename
-abbr -a pacU 'pacman -U'
+    # install packages without syncing
+    __pacman_abbr pacI 'pacman -S'
 
-# install all packages in current directory
-abbr -a pacd 'pacman -U *.pkg.*'
+    # install, sync, and upgrade packages (forcibly refresh package lists)
+    __pacman_abbr pacu 'pacman -Syyu'
 
+    # install packages by filename
+    __pacman_abbr pacU 'pacman -U'
 
-#
-# Remove
-#
-
-# remove package and unneeded dependencies
-abbr -a pacr 'pacman -R'
-
-# remove package, unneeded dependencies, and configuration files
-abbr -a pacrm 'pacman -Rns'
-
-
-#
-# Query
-#
-
-# query package information from the remote repository
-abbr -a pacq 'pacman -Si'
-
-# query package information from the local repository
-abbr -a pacQ 'pacman -Qi'
+    # install all packages in current directory
+    __pacman_abbr pacd 'pacman -U *.pkg.*'
 
 
-#
-# Search
-#
+    #
+    # Remove
+    #
 
-# search for package in the remote repository
-abbr -a pacs 'pacman -Ss'
+    # remove package and unneeded dependencies
+    __pacman_abbr pacr 'pacman -R'
 
-# search for the package in the local repository
-abbr -a pacS 'pacman -Qs'
-
-
-#
-# Orphans
-#
-
-# list orphan packages
-abbr -a pacol 'pacman -Qdt'
-
-# remove orphan packages
-abbr -a pacor 'pacman -Rns (pacman -Qtdq)'
+    # remove package, unneeded dependencies, and configuration files
+    __pacman_abbr pacrm 'pacman -Rns'
 
 
-#
-# Ownership
-#
+    #
+    # Query
+    #
 
-# list all files that belong to a package
-abbr -a pacown 'pacman -Ql'
+    # query package information from the remote repository
+    __pacman_abbr pacq 'pacman -Si'
 
-# show package(s) owning the specified file
-abbr -a pacblame 'pacman -Qo'
-
-# Upgrade using powerpill to download from all mirrors simultaneously
-abbr -a upgrade 'sudo pacman -Sy && sudo powerpill -Su && yay -Su'
+    # query package information from the local repository
+    __pacman_abbr pacQ 'pacman -Qi'
 
 
-function __fish_pacman_uninstall --on-event fish_pacman_uninstall
-    abbr --erase pacb
-    abbr --erase paci
-    abbr --erase pacI
-    abbr --erase pacu
-    abbr --erase pacU
-    abbr --erase pacd
-    abbr --erase pacr
-    abbr --erase pacrm
-    abbr --erase pacq
-    abbr --erase pacQ
-    abbr --erase pacs
-    abbr --erase pacS
-    abbr --erase pacol
-    abbr --erase pacor
-    abbr --erase pacown
-    abbr --erase pacblame
-    abbr --erase upgrade
-    functions --erase aurb
-    functions --erase aurd
-    functions --erase auru
+    #
+    # Search
+    #
+
+    # search for package in the remote repository
+    __pacman_abbr pacs 'pacman -Ss'
+
+    # search for the package in the local repository
+    __pacman_abbr pacS 'pacman -Qs'
+
+
+    #
+    # Orphans
+    #
+
+    # list orphan packages
+    __pacman_abbr pacol 'pacman -Qdt'
+
+    # remove orphan packages
+    __pacman_abbr pacor 'pacman -Rns (pacman -Qtdq)'
+
+
+    #
+    # Ownership
+    #
+
+    # list all files that belong to a package
+    __pacman_abbr pacown 'pacman -Ql'
+
+    # show package(s) owning the specified file
+    __pacman_abbr pacblame 'pacman -Qo'
+
+    __pacman_abbr upgrade 'sudo pacman -Sy && sudo powerpill -Su && yay -Su'
+end
+
+function __pacman_abbr_update --on-event fish_pacman_update
+    __pacman_abbr_uninstall
+    __pacman_abbr_install
+end
+
+function __pacman_abbr_uninstall --on-event fish_pacman_uninstall
+    for ab in $__pacman_abbr_abbreviations
+        abbr --erase $ab
+    end
+    set -Ue __pacman_abbr_abbreviations
+    set -Ue __pacman_abbr_initialized
 end
