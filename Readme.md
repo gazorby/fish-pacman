@@ -4,10 +4,10 @@ Pacman abbreviations, ported from [here](https://github.com/zimfw/pacman)
 
 ## 🚀 Installation
 
-Using [fisher](https://github.com/jorgebucaran/fisher)
+Using [Fisher](https://github.com/jorgebucaran/fisher):
 
 ```console
-fisher add Gazorby/fish-pacman
+fisher install Gazorby/fish-pacman
 ```
 
 ## 🔧 Usage
