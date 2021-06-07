@@ -90,7 +90,7 @@ function __pacman_abbr_install --on-event fish_pacman_install
     # show package(s) owning the specified file
     __pacman_abbr pacblame 'pacman -Qo'
 
-    __pacman_abbr upgrade 'sudo pacman -Sy && sudo powerpill -Su && yay -Su'
+    __pacman_abbr upgrade 'sudo pacman -Sy && sudo powerpill -Su && paru -Su'
 end
 
 function __pacman_abbr_update --on-event fish_pacman_update
