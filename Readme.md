@@ -7,7 +7,7 @@ Pacman abbreviations, ported from [here](https://github.com/zimfw/pacman)
 Using [Fisher](https://github.com/jorgebucaran/fisher):
 
 ```console
-fisher install Gazorby/fish-pacman
+fisher install gazorby/fish-pacman
 ```
 
 ## 🔧 Usage
