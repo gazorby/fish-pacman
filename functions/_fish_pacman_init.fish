@@ -80,6 +80,6 @@ function _fish_pacman_init -d "Initialize pacman plugin"
 
     _fish_pacman_abbr upgrade 'sudo pacman -Sy && sudo powerpill -Su && paru -Su'
 
-    # Mark git plugin as initialized
-    set -U __git_plugin_initialized 1
+    # Mark plugin as initialized
+    set -U __fish_pacman_initialized 1
 end
