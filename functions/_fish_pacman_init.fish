@@ -1,4 +1,4 @@
-function _fish_pacman_init -d "Initialize pacman plugin"
+function _fish_pacman_init -d "Initialize sudo pacman plugin"
     # build package in current directory, cleanup, and install
     _fish_pacman_abbr pacb 'makepkg -sci'
 
@@ -9,19 +9,19 @@ function _fish_pacman_init -d "Initialize pacman plugin"
     #NOTE: Installing/upgrading individual packages is NOT supported. Sync and upgrade ALL on install.
 
     # install, sync, and upgrade packages
-    _fish_pacman_abbr paci 'pacman -Syu'
+    _fish_pacman_abbr paci 'sudo pacman -Syu'
 
     # install packages without syncing
-    _fish_pacman_abbr pacI 'pacman -S'
+    _fish_pacman_abbr pacI 'sudo pacman -S'
 
     # install, sync, and upgrade packages (forcibly refresh package lists)
-    _fish_pacman_abbr pacu 'pacman -Syyu'
+    _fish_pacman_abbr pacu 'sudo pacman -Syyu'
 
     # install packages by filename
-    _fish_pacman_abbr pacU 'pacman -U'
+    _fish_pacman_abbr pacU 'sudo pacman -U'
 
     # install all packages in current directory
-    _fish_pacman_abbr pacd 'pacman -U *.pkg.*'
+    _fish_pacman_abbr pacd 'sudo pacman -U *.pkg.*'
 
 
     #
@@ -29,10 +29,10 @@ function _fish_pacman_init -d "Initialize pacman plugin"
     #
 
     # remove package and unneeded dependencies
-    _fish_pacman_abbr pacr 'pacman -R'
+    _fish_pacman_abbr pacr 'sudo pacman -R'
 
     # remove package, unneeded dependencies, and configuration files
-    _fish_pacman_abbr pacrm 'pacman -Rns'
+    _fish_pacman_abbr pacrm 'sudo pacman -Rns'
 
 
     #
@@ -65,7 +65,7 @@ function _fish_pacman_init -d "Initialize pacman plugin"
     _fish_pacman_abbr pacol 'pacman -Qdt'
 
     # remove orphan packages
-    _fish_pacman_abbr pacor 'pacman -Rns (pacman -Qtdq)'
+    _fish_pacman_abbr pacor 'sudo pacman -Rns (sudo pacman -Qtdq)'
 
 
     #
